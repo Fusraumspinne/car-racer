@@ -23,7 +23,9 @@ public class Car : MonoBehaviour
     public ParticleSystem explosionYellow;
     public MonoBehaviour carScript;
 
-    public GameObject mobileSteeringUI;
+    public GameObject mobileSteeringUIRechts;
+    public GameObject mobileSteeringUILinks;
+    public GameObject mobileSteeringUIMitte;
     public bool isSteeringMobile;
 
     public void Start()
@@ -32,13 +34,17 @@ public class Car : MonoBehaviour
         {
             isSteeringMobile = false;
 
-            mobileSteeringUI.SetActive(false);
+            mobileSteeringUIRechts.SetActive(false);
+            mobileSteeringUILinks.SetActive(false);
+            mobileSteeringUIMitte.SetActive(false);
         } 
         else
         {
             isSteeringMobile = true;
 
-            mobileSteeringUI.SetActive(true);
+            mobileSteeringUIRechts.SetActive(true);
+            mobileSteeringUILinks.SetActive(true);
+            mobileSteeringUIMitte.SetActive(true);
 
             gasInput = 1;
         }
@@ -73,12 +79,18 @@ public class Car : MonoBehaviour
             }
             else
             {
-                brakeInput = 0;
+                if (!isSteeringMobile)
+                {
+                    brakeInput = 0;
+                }
             }
         }
         else
         {
-            brakeInput = 0;
+            if (!isSteeringMobile)
+            {
+                brakeInput = 0;
+            }
         }
     }
 
@@ -93,8 +105,16 @@ public class Car : MonoBehaviour
 
     void ApplyMotor()
     {
-        colliders.RRWheel.motorTorque = motorPower * gasInput;
-        colliders.RLWheel.motorTorque = motorPower * gasInput;
+        if (speed <= 15)
+        {
+            colliders.RRWheel.motorTorque = motorPower * gasInput;
+            colliders.RLWheel.motorTorque = motorPower * gasInput;
+        }
+        else
+        {
+            colliders.RRWheel.motorTorque = 0;
+            colliders.RLWheel.motorTorque = 0;
+        }
     }
 
     void ApplySteering()
@@ -131,7 +151,7 @@ public class Car : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
-            if (speed > 7)
+            if (speed > 10)
             {
                 explosionRed.Play();
                 explosionYellow.Play();
@@ -162,6 +182,18 @@ public class Car : MonoBehaviour
     public void StopSteering()
     {
         steeringInput = 0; 
+    }
+
+    public void GasGeben()
+    {
+        gasInput = 1;
+        brakeInput = 0;
+    }
+
+    public void Bremsen()
+    {
+        gasInput = 0;
+        brakeInput = 1;
     }
 }
 

@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 2701513529437057669}
   - component: {fileID: 4385697869338636196}
   - component: {fileID: 1501863868926303781}
+  - component: {fileID: 7917868036768491288}
   m_Layer: 0
   m_Name: NPCCar
   m_TagString: NPC
@@ -825,7 +826,7 @@ MonoBehaviour:
   gasInput: 0
   brakeInput: 0
   steeringInput: 0
-  motorPower: 100
+  motorPower: 50
   brakePower: 500000
   slipAngle: 0
   speed: 0
@@ -853,6 +854,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7917868036768491288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927478683285225171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494e00b889d07ef4eaf3d34d09b0f588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7279505456725804677
 GameObject:
   m_ObjectHideFlags: 0
